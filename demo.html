@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>demo</title>
+    <script>
+        var day=new Date().getDay();
+        switch (day)
+        {
+            case 0:
+                x="Today it's Sunday";
+                break;
+            case 1:
+                x="Today it's Monday";
+                break;
+            case 2:
+                x="Today it's Tuesday";
+                break;
+            case 3:
+                x="Today it's Wednesday";
+                break;
+            case 4:
+                x="Today it's Thursday";
+                break;
+            case 5:
+                x="Today it's Friday";
+                break;
+            case 6:
+                x="Today it's Saturday";
+                break;
+        }
+        document.write(x);
+    </script>
+    <script>
+        function changetext(id)
+        {
+            var person={fname:"Bill",lname:"Gates",age:56};
+            var txt = "";
+            for (x in person)
+            {
+                txt= txt + person[x];
+            }
+            id.innerHTML=txt + "谢谢!";
+        }
+    </script>
+</head>
+<body>
+    <h1 onclick="changetext(this)">请点击该文本</h1>
+
+
+    <div onmouseover="mOver(this)" onmousedown="mDown(this)" onmouseup="mUp(this)" style="background-color:green;color:#ffffff;width:90px;height:20px;padding:40px;font-size:12px;">请点击这里</div>
+    <script>
+        function mDown(obj)
+        {
+            obj.style.backgroundColor="orange";
+            obj.innerHTML="请释放鼠标按钮";
+        }
+        function mUp(obj)
+        {
+            obj.style.backgroundColor="green";
+            obj.innerHTML="请按下鼠标按钮";
+        }
+        function mOver(obj)
+        {
+            obj.style.backgroundColor="blue";
+            obj.innerHTML="鼠标悬空了哦";
+        }
+    </script>
+</body>
+</html>
