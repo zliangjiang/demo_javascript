@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>GeoCoder And LocalSearch</title>
+    <style type="text/css">html {
+        height: 100%
+    }
+
+    body {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+    }
+
+    #container {
+        height: 100%
+    }</style>
+    <script src="http://api.map.baidu.com/api?v=1.3" type="text/javascript"></script>
+</head>
+<body>
+<h2>地址解析</h2>
+<input id="address_1" value="上海市浦东新区花木路" type="text"/>
+<input type="button" value="地址解析" onclick="fun_geocoder_getPoint();"/>
+（getPoint：需要输入详细到街道的地址）</br>
+
+<span style="display:inline-block;line-height:20px;width:300px;font-size:14px;border-bottom:1px solid #ccc;" type="text" id="address_2"></span>
+<input value="反地址解析" type="button" onclick="fun_geocoder_getLocation();" />
+（getLocation：点击反地址解析后，点击地图返回地址。）</br>
+
+<div style="left:20px;width:520px;height:340px;border:1px solid gray;float:left;" id="container"></div>
+
+<script type="text/javascript">
+    var map=new BMap.Map("container");
+    map.centerAndZoom("北京市",12);
+    map.addControl(new BMap.NavigationControl());
+   var myGeo=new BMap.Geocoder();
+
+    function fun_geocoder_getPoint(){
+        var value_address_1=document.getElementById("address_1").value;
+        myGeo.getPoint(value_address_1,function(e){
+            if(e){
+                map.centerAndZoom(e,15);
+                map.addOverlay(new BMap.Marker(e));
+            }
+
+        },"全国");
+    }
+
+    function fun_geocoder_getLocation(){
+        map.addEventListener("click",function(e){
+            var pt= e.point;
+            myGeo.getLocation(pt,function(rs){
+                var addComp=rs.addressComponents;
+                document.getElementById("address_2").innerHTML= addComp.province + addComp.city + addComp.district + addComp.street + addComp.streetNumber;
+
+            })
+        })
+    }
+
+
+
+</script>
+
+</body>
+</html>
